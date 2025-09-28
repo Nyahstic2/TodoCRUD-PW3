@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciador de Tarefas</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+    <form id="formid" action="php/addtask.php" method="post">
+        <label for="catnew">Usar categorias existentes</label><input type="checkbox" name="catnew" id="catnew">
+        <label for="nome">Nome da Tarefa</label>
+        <input type="text" name="nome" id="txtnome" placeholder="Escrever algo sem usar IA..." required autocomplete="off">
+        <br>
+        <label for="categoria">Categoria</label>
+        <input type="text" name="categoria" id="txtcategoria" placeholder="Dia a Dia" autocomplete="off">
+        <select name="catexistent" id="catexistent">
+            <option value="invalid">Escolha uma opção...</option>
+        </select>
+        <br>
+        <label for="importancia">Importância</label>
+        <input type="number" name="importancia" id="importancia" value="0" min="0" max="100">
+        <br>
+        <input type="submit" value="Registrar nova Tarefa">
+    </form>
+    <main id="taskAreas">
+
+    </main>
+    <script src="./js/colorgradient-by-ai.js"></script>
+    <script src="./js/frontend.js"></script>
+
+
+</body>
+
+</html>

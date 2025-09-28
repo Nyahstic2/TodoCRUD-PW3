@@ -1,0 +1,360 @@
+/* --- Estilos Globais e Resets --- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+
+:root {
+    --primary-color: #4a90e2; /* Um azul moderno */
+    --primary-hover: #357ABD;
+    --danger-color: #e94e77;
+    --danger-hover: #D9426A;
+    --success-color: #50e3c2;
+    --success-hover: #48CFAF;
+    --warning-color: #f5a623;
+    --warning-hover: #D4881F;
+    --light-bg: #f8f9fa; /* Fundo principal claro */
+    --dark-text: #343a40; /* Cor do texto escuro */
+    --light-text: #ffffff; /* Cor do texto claro (para botões) */
+    --border-color: #dee2e6;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Sombra suave */
+    --done-color: #202020; /* Verde para tarefas concluídas */
+}
+
+/* Dark theme variables */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --primary-color: #7ab8ff;
+        --primary-hover: #357ABD;
+        --danger-color: #ff6f91;
+        --danger-hover: #e94e77;
+        --success-color: #4fd6b0;
+        --success-hover: #3bbf99;
+        --warning-color: #ffd166;
+        --warning-hover: #e6b800;
+        --light-bg: #181a1b;
+        --dark-text: #f8f9fa;
+        --light-text: #222;
+        --border-color: #444;
+        --shadow: 0 4px 12px rgba(0,0,0,0.32);
+        --done-color: #131313;
+    }
+
+    .task{
+        color: initial;
+    }
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* --- Estilo para o diálogo de edição --- */
+dialog#editTarefa {
+    padding: 0;
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+    background: var(--light-bg);
+    color: var(--dark-text);
+    min-width: 340px;
+    max-height: 90vh;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: fixed;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 50%;
+}
+
+dialog#editTarefa::backdrop {
+    background: rgba(0,0,0,0.35);
+}
+
+dialog#editTarefa form {
+    background: none;
+    box-shadow: none;
+    border-radius: 0;
+    padding: 32px 24px 24px 24px;
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+dialog#editTarefa button[type="button"] {
+    background: var(--danger-color);
+}
+dialog#editTarefa button[type="button"]:hover {
+    background: var(--danger-hover);
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--light-bg);
+    color: var(--dark-text);
+    line-height: 1.6;
+    padding: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Garante que o body ocupe a altura toda */
+    gap: 40px; /* Espaçamento entre o form e as tarefas */
+}
+
+/* --- Estilização do Formulário --- */
+form {
+    background-color: var(--light-text);
+    padding: 25px 30px;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    width: 100%;
+    max-width: 450px; /* Largura fixa para o formulário */
+    flex-shrink: 0; /* Impede que o formulário encolha */
+}
+
+/* Esconde as tags <br> para termos mais controle com CSS */
+form br {
+    display: none;
+}
+
+form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+form button,
+input:not(input[type="number"]){
+    background: var(--light-bg);
+    color: var(--dark-text);
+}
+
+form button,
+input[type="text"],
+input[type="number"],
+select {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 20px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+form button,
+input[type="text"]:focus,
+input[type="number"]:focus,
+select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+}
+
+/* Estilização do Checkbox */
+label[for="catnew"] {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+input[type="checkbox"] {
+    margin-left: 8px;
+    transform: scale(1.2);
+}
+
+/* Botão de Envio */
+form button{
+    width: 100%;
+    padding: 12px 20px;
+    background-color: var(--warning-color);
+    color: var(--light-text);
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+input[type="submit"] {
+    width: 100%;
+    padding: 12px 20px;
+    background-color: var(--primary-color);
+    color: var(--light-text);
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+form button:hover{
+    background-color: var(--warning-hover);
+}
+
+input[type="submit"]:hover {
+    background-color: var(--primary-hover);
+}
+
+/* --- Área das Tarefas --- */
+#taskAreas {
+    width: 100%;
+    max-width: 800px;
+    height: 85vh; /* Define uma altura para a área de tarefas */
+    overflow-y: auto; /* Adiciona scroll quando o conteúdo transborda */
+    padding-right: 10px; /* Espaço para a barra de rolagem não colar no conteúdo */
+}
+
+/* Customização da barra de rolagem (Opcional, mas melhora o visual) */
+#taskAreas::-webkit-scrollbar {
+    width: 8px;
+}
+#taskAreas::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+#taskAreas::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 10px;
+}
+#taskAreas::-webkit-scrollbar-thumb:hover {
+    background: #aaa;
+}
+
+
+/* Container da Categoria (Criado dinamicamente via JS) */
+div[data-category] {
+    background-color: var(--light-text);
+    margin-bottom: 30px;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+}
+
+/* Título da Categoria (Criado dinamicamente via JS) */
+div[data-category] h1 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--primary-color);
+    color: var(--primary-color);
+}
+
+/* Tarefa Individual (Criado dinamicamente via JS) */
+.task {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    margin-bottom: 10px;
+    transition: box-shadow 0.2s;
+}
+
+.task:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.task p {
+    flex-grow: 1; /* Faz o texto ocupar o espaço disponível */
+    margin-right: 15px;
+}
+
+/* Botões da Tarefa (Criado dinamicamente via JS) */
+.task button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 6px;
+    color: var(--light-text);
+    cursor: pointer;
+    font-size: 0.9rem;
+    margin-left: 10px;
+    transition: background-color 0.2s, opacity 0.2s;
+    white-space: nowrap; /* Evita que o texto quebre linha */
+}
+
+/* Estilos específicos dos botões por função */
+.task button.marcarPronto {
+    background-color: var(--success-color);
+}
+.task button.marcarPronto:hover {
+    background-color: var(--success-hover);
+}
+
+.task button.deletar {
+    background-color: var(--danger-color);
+}
+.task button.deletar:hover {
+    background-color: var(--danger-hover);
+}
+
+.task button.editar {
+    background-color: var(--warning-color);
+}
+.task button.editar:hover {
+    background-color: var(--warning-hover);
+}
+
+.task-done *:not(button){
+    font-style: italic;
+    text-decoration: line-through;
+}
+
+div.task-done{
+    background-color: var(--done-color) !important;
+    color: white;
+}
+
+
+/* --- Design Responsivo para Telas Menores --- */
+@media (max-width: 960px) {
+    body {
+        flex-direction: column; /* Volta para o layout de coluna */
+        min-height: auto;
+        padding: 20px;
+        gap: 0;
+    }
+
+    form {
+        margin-bottom: 40px; /* Adiciona margem de volta */
+        max-width: 600px;
+    }
+
+    #taskAreas {
+        height: auto; /* Altura automática */
+        max-height: none;
+        overflow-y: visible; /* Remove a rolagem interna */
+        padding-right: 0;
+        max-width: 600px;
+    }
+
+    .task {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .task p {
+        margin-bottom: 10px;
+        margin-right: 0;
+    }
+    
+    .task div { /* Container dos botões */
+        width: 100%;
+        display: flex;
+        gap: 10px;
+    }
+
+    .task button {
+        width: 100%;
+        margin-left: 0;
+    }
+}
+

@@ -1,7 +1,7 @@
 <?php
     $host = "localhost";
     $user = "root";
-    $pass = "usbw"; // Seria interessante mudar, mas por enquanto mantenha como usbw
+    $pass = ""; 
     $base = "tarefas";
 
     $conexao = new mysqli($host, $user, $pass, $base);
@@ -10,4 +10,5 @@
         die("Erro de conexão: ".connect_error);
     }else{
     }
+
 ?>

@@ -2,11 +2,27 @@
 include "connection.php";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-	// Atualiza tarefa
-	$id = $_POST['id'] ?? '';
-	$nome = $_POST['nome'] ?? '';
-	$categoria = $_POST['categoria'] ?? '';
-	$importancia = $_POST['importancia'] ?? 0;
+	// Atualiza tarefa    
+	$id = 0;
+	$nome = "Tarefa sem Nome";
+	$categoria = "Tarefa sem Categoria";
+	$importancia = 0;
+	
+	if (isset($_POST['id']) && is_numeric($_POST['id'])){
+        $id = $_POST['id'];
+    }
+	
+    if (isset($_POST['nome']) && is_string($_POST['nome'])){
+        $nome = $_POST['nome'];
+    }
+
+    if (isset($_POST['categoria']) && is_string($_POST['categoria'])){
+        $categoria = $_POST['categoria'];
+    }
+
+    if (isset($_POST['importancia']) && is_numeric($_POST['importancia'])){
+        $importancia = $_POST['importancia'];
+    }
 
 	if ($id !== '') {
 		$stmt = $conexao->prepare("UPDATE tarefas SET nome=?, categoria=?, importancia=? WHERE id=?");
@@ -19,7 +35,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 // GET: Exibe formulário
-$id = $_GET['id'] ?? '';
+$id = '';
+
+if (isset($_POST['id']) && is_numeric($_POST['id'])){
+	$id = $_POST['id'];
+}
+
 if ($id === '') {
 	echo "<p>ID da tarefa não informado.</p>";
 	exit();
@@ -76,5 +97,6 @@ $stmt->close();
 
     </script>
 </body>
+
 
 </html>
